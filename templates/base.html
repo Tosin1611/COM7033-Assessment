@@ -3,23 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <title>Secure Healthcare Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f7fb;
+            color: #222;
+        }
+
+        .header {
+            background-color: #1f4e79;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .topbar {
+            background-color: #163a5a;
+            color: white;
+            padding: 10px 30px;
+            font-size: 14px;
+        }
+
+        .topbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .wrapper {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        h2, h3 {
+            color: #1f4e79;
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #1f4e79;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #163a5a;
+        }
+
+        .flash {
+            background-color: #ffe9e9;
+            border: 1px solid #cc6666;
+            color: #7a1f1f;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .success {
+            background-color: #e8f5e9;
+            border: 1px solid #6bb26f;
+            color: #215c27;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .grid-two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-three {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table th, table td {
+            border: 1px solid #d6d6d6;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        table th {
+            background-color: #eef4fa;
+            color: #1f4e79;
+        }
+
+        .section-title {
+            border-bottom: 2px solid #dbe7f3;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .small-text {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .info-box {
+            background-color: #eef5fc;
+            border-left: 4px solid #1f4e79;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .inline-form {
+            margin: 0;
+        }
+
+        .btn-small {
+            padding: 8px 10px;
+            font-size: 13px;
+            width: auto;
+        }
+
+        @media (max-width: 800px) {
+            .grid-two,
+            .grid-three {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    {% if session.get('username') %}
-        <p>
-            Logged in as {{ session.get('username') }} ({{ session.get('role') }})
-            | <a href="{{ url_for('auth.logout') }}">Logout</a>
-        </p>
-    {% endif %}
+    <div class="header">
+        <h1>Secure Healthcare Management System</h1>
+    </div>
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
+    <div class="topbar">
+        {% if session.get('username') %}
+            Logged in as <strong>{{ session.get('username') }}</strong> ({{ session.get('role') }})
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
         {% endif %}
-    {% endwith %}
+    </div>
 
-    {% block content %}{% endblock %}
+    <div class="wrapper">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>

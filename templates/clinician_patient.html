@@ -1,62 +1,163 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Patient Record</h1>
+<div class="card">
+    <h2 class="section-title">Patient Record</h2>
 
-<p><strong>Patient ID:</strong> {{ record.patient_id }}</p>
+    <div class="grid-three">
+        <div>
+            <p><strong>Patient ID:</strong> {{ record.patient_id }}</p>
+            <p><strong>Full Name:</strong> {{ record.full_name }}</p>
+            <p><strong>Age:</strong> {{ record.age }}</p>
+        </div>
+        <div>
+            <p><strong>Sex:</strong> {{ record.sex }}</p>
+            <p><strong>Blood Pressure:</strong> {{ record.blood_pressure }}</p>
+            <p><strong>Cholesterol:</strong> {{ record.cholesterol }}</p>
+        </div>
+        <div>
+            <p><strong>Resting ECG:</strong> {{ record.resting_ecg }}</p>
+            <p><strong>Medical History:</strong> {{ record.medical_history }}</p>
+        </div>
+    </div>
+</div>
 
-<form method="POST" action="{{ url_for('clinician.update_patient', patient_id=record.patient_id) }}">
-    <label>Full Name</label>
-    <input type="text" name="full_name" value="{{ record.full_name }}" required>
+<div class="grid-two">
+    <div class="card">
+        <h3 class="section-title">Update Patient Details</h3>
 
-    <label>Age</label>
-    <input type="text" name="age" value="{{ record.age }}" required>
+        <form method="POST" action="{{ url_for('clinician.update_patient', patient_id=record.patient_id) }}">
+            <label>Full Name</label>
+            <input type="text" name="full_name" value="{{ record.full_name }}" required>
 
-    <label>Blood Pressure</label>
-    <input type="text" name="blood_pressure" value="{{ record.blood_pressure }}" required>
+            <label>Age</label>
+            <input type="text" name="age" value="{{ record.age }}" required>
 
-    <label>Cholesterol</label>
-    <input type="text" name="cholesterol" value="{{ record.cholesterol }}" required>
+            <label>Blood Pressure</label>
+            <input type="text" name="blood_pressure" value="{{ record.blood_pressure }}" required>
 
-    <label>Resting ECG</label>
-    <input type="text" name="resting_ecg" value="{{ record.resting_ecg }}" required>
+            <label>Cholesterol</label>
+            <input type="text" name="cholesterol" value="{{ record.cholesterol }}" required>
 
-    <label>Medical History</label>
-    <textarea name="medical_history" required>{{ record.medical_history }}</textarea>
+            <label>Resting ECG</label>
+            <input type="text" name="resting_ecg" value="{{ record.resting_ecg }}" required>
 
-    <button type="submit">Update Patient Details</button>
-</form>
+            <label>Medical History</label>
+            <textarea name="medical_history" required>{{ record.medical_history }}</textarea>
 
-<form method="POST" action="{{ url_for('clinician.add_note', patient_id=record.patient_id) }}">
-    <label>Date</label>
-    <input type="text" name="date" placeholder="YYYY-MM-DD" required>
+            <button type="submit">Update Patient Details</button>
+        </form>
+    </div>
 
-    <label>Note</label>
-    <textarea name="note" required></textarea>
+    <div class="card">
+        <h3 class="section-title">Add Consultation Note</h3>
 
-    <button type="submit">Add Note</button>
-</form>
+        <form method="POST" action="{{ url_for('clinician.add_note', patient_id=record.patient_id) }}">
+            <label>Date</label>
+            <input type="text" name="date" placeholder="YYYY-MM-DD" required>
 
-<form method="POST" action="{{ url_for('clinician.add_new_prescription', patient_id=record.patient_id) }}">
-    <label>Date</label>
-    <input type="text" name="date" placeholder="YYYY-MM-DD" required>
+            <label>Consultation Note</label>
+            <textarea name="note" required></textarea>
 
-    <label>Drug</label>
-    <input type="text" name="drug" required>
+            <button type="submit">Add Consultation Note</button>
+        </form>
+    </div>
+</div>
 
-    <label>Dosage</label>
-    <input type="text" name="dosage" required>
+<div class="grid-two">
+    <div class="card">
+        <h3 class="section-title">Add Prescription</h3>
 
-    <button type="submit">Add Prescription</button>
-</form>
+        <form method="POST" action="{{ url_for('clinician.add_new_prescription', patient_id=record.patient_id) }}">
+            <label>Date</label>
+            <input type="text" name="date" placeholder="YYYY-MM-DD" required>
 
-<form method="POST" action="{{ url_for('clinician.add_new_appointment', patient_id=record.patient_id) }}">
-    <label>Date</label>
-    <input type="text" name="date" placeholder="YYYY-MM-DD" required>
+            <label>Drug</label>
+            <input type="text" name="drug" required>
 
-    <label>Details</label>
-    <input type="text" name="details" required>
+            <label>Dosage</label>
+            <input type="text" name="dosage" required>
 
-    <button type="submit">Add Appointment</button>
-</form>
+            <button type="submit">Add Prescription</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h3 class="section-title">Add Appointment</h3>
+
+        <form method="POST" action="{{ url_for('clinician.add_new_appointment', patient_id=record.patient_id) }}">
+            <label>Date</label>
+            <input type="text" name="date" placeholder="YYYY-MM-DD" required>
+
+            <label>Appointment Details</label>
+            <input type="text" name="details" required>
+
+            <button type="submit">Add Appointment</button>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <h3 class="section-title">Appointments</h3>
+    {% if record.appointments %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Details</th>
+            </tr>
+            {% for appointment in record.appointments %}
+            <tr>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.details }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No appointments available.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3 class="section-title">Prescriptions</h3>
+    {% if record.prescriptions %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Drug</th>
+                <th>Dosage</th>
+            </tr>
+            {% for prescription in record.prescriptions %}
+            <tr>
+                <td>{{ prescription.date }}</td>
+                <td>{{ prescription.drug }}</td>
+                <td>{{ prescription.dosage }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No prescriptions available.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3 class="section-title">Consultation Notes</h3>
+    {% if record.consultation_notes %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Clinician</th>
+                <th>Note</th>
+            </tr>
+            {% for note in record.consultation_notes %}
+            <tr>
+                <td>{{ note.date }}</td>
+                <td>{{ note.clinician }}</td>
+                <td>{{ note.note }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No consultation notes available.</p>
+    {% endif %}
+</div>
 {% endblock %}

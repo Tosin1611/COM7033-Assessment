@@ -1,15 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Login</h1>
+<div class="card" style="max-width: 500px; margin: 40px auto;">
+    <h2 class="section-title">User Login</h2>
 
-<form method="POST">
-    <label>Username</label>
-    <input type="text" name="username" required>
+    <div class="info-box">
+        Please sign in using your allocated username and password.
+    </div>
 
-    <label>Password</label>
-    <input type="password" name="password" required>
+    <form method="POST">
+        <label>Username</label>
+        <input type="text" name="username" required>
 
-    <button type="submit">Login</button>
-</form>
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="small-text">
+        <p><strong>Demo Accounts</strong></p>
+        <p>Patient: patient1 / patientpass</p>
+        <p>Clinician: clinician1 / clinicianpass</p>
+        <p>Admin: admin1 / adminpass</p>
+    </div>
+</div>
 {% endblock %}

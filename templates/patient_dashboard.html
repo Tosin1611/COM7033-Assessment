@@ -1,37 +1,99 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Patient Dashboard</h1>
+<div class="card">
+    <h2 class="section-title">Patient Dashboard</h2>
+    <p>Welcome to your healthcare record portal. You can view your personal healthcare information below.</p>
+</div>
 
 {% if record %}
-    <p><strong>Patient ID:</strong> {{ record.patient_id }}</p>
-    <p><strong>Full Name:</strong> {{ record.full_name }}</p>
-    <p><strong>Age:</strong> {{ record.age }}</p>
-    <p><strong>Sex:</strong> {{ record.sex }}</p>
-    <p><strong>Blood Pressure:</strong> {{ record.blood_pressure }}</p>
-    <p><strong>Cholesterol:</strong> {{ record.cholesterol }}</p>
-    <p><strong>Resting ECG:</strong> {{ record.resting_ecg }}</p>
-    <p><strong>Medical History:</strong> {{ record.medical_history }}</p>
+<div class="card">
+    <h3 class="section-title">Personal Profile</h3>
 
-    <h2>Appointments</h2>
-    <ul>
-        {% for appointment in record.appointments %}
-            <li>{{ appointment.date }} - {{ appointment.details }}</li>
-        {% endfor %}
-    </ul>
+    <div class="grid-three">
+        <div>
+            <p><strong>Patient ID:</strong> {{ record.patient_id }}</p>
+            <p><strong>Full Name:</strong> {{ record.full_name }}</p>
+            <p><strong>Age:</strong> {{ record.age }}</p>
+        </div>
+        <div>
+            <p><strong>Sex:</strong> {{ record.sex }}</p>
+            <p><strong>Blood Pressure:</strong> {{ record.blood_pressure }}</p>
+            <p><strong>Cholesterol:</strong> {{ record.cholesterol }}</p>
+        </div>
+        <div>
+            <p><strong>Resting ECG:</strong> {{ record.resting_ecg }}</p>
+            <p><strong>Medical History:</strong> {{ record.medical_history }}</p>
+        </div>
+    </div>
+</div>
 
-    <h2>Prescriptions</h2>
-    <ul>
-        {% for prescription in record.prescriptions %}
-            <li>{{ prescription.date }} - {{ prescription.drug }} - {{ prescription.dosage }}</li>
-        {% endfor %}
-    </ul>
+<div class="card">
+    <h3 class="section-title">Appointments</h3>
+    {% if record.appointments %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Details</th>
+            </tr>
+            {% for appointment in record.appointments %}
+            <tr>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.details }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No appointments available.</p>
+    {% endif %}
+</div>
 
-    <h2>Consultation Notes</h2>
-    <ul>
-        {% for note in record.consultation_notes %}
-            <li>{{ note.date }} - {{ note.clinician }} - {{ note.note }}</li>
-        {% endfor %}
-    </ul>
+<div class="card">
+    <h3 class="section-title">Prescriptions</h3>
+    {% if record.prescriptions %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Drug</th>
+                <th>Dosage</th>
+            </tr>
+            {% for prescription in record.prescriptions %}
+            <tr>
+                <td>{{ prescription.date }}</td>
+                <td>{{ prescription.drug }}</td>
+                <td>{{ prescription.dosage }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No prescriptions available.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3 class="section-title">Consultation Notes</h3>
+    {% if record.consultation_notes %}
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Clinician</th>
+                <th>Note</th>
+            </tr>
+            {% for note in record.consultation_notes %}
+            <tr>
+                <td>{{ note.date }}</td>
+                <td>{{ note.clinician }}</td>
+                <td>{{ note.note }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No consultation notes available.</p>
+    {% endif %}
+</div>
+{% else %}
+<div class="card">
+    <p>No patient record found.</p>
+</div>
 {% endif %}
 {% endblock %}

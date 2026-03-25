@@ -1,52 +1,73 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Admin Dashboard</h1>
+<div class="card">
+    <h2 class="section-title">Admin Dashboard</h2>
+    <p>Manage system user accounts, role allocation, and account activity status.</p>
+</div>
 
-<h2>Create User</h2>
-<form method="POST">
-    <label>Username</label>
-    <input type="text" name="username" required>
+<div class="grid-two">
+    <div class="card">
+        <h3 class="section-title">Create User Account</h3>
 
-    <label>Password</label>
-    <input type="password" name="password" required>
+        <form method="POST">
+            <label>Username</label>
+            <input type="text" name="username" required>
 
-    <label>Role</label>
-    <select name="role" required>
-        <option value="patient">Patient</option>
-        <option value="clinician">Clinician</option>
-        <option value="admin">Admin</option>
-    </select>
+            <label>Password</label>
+            <input type="password" name="password" required>
 
-    <label>Linked Patient ID</label>
-    <input type="text" name="linked_patient_id">
+            <label>Role</label>
+            <select name="role" required>
+                <option value="patient">Patient</option>
+                <option value="clinician">Clinician</option>
+                <option value="admin">Admin</option>
+            </select>
 
-    <button type="submit">Create User</button>
-</form>
+            <label>Linked Patient ID (for patient accounts only)</label>
+            <input type="text" name="linked_patient_id">
 
-<h2>Manage Users</h2>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Role</th>
-        <th>Linked Patient ID</th>
-        <th>Active</th>
-        <th>Action</th>
-    </tr>
-    {% for user in users %}
-    <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.role }}</td>
-        <td>{{ user.linked_patient_id }}</td>
-        <td>{{ user.active }}</td>
-        <td>
-            <form method="POST" action="{{ url_for('admin.toggle_user', user_id=user.id) }}">
-                <button type="submit">Toggle Active</button>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+            <button type="submit">Create User</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h3 class="section-title">Guidance</h3>
+        <div class="info-box">
+            Admin accounts control user creation, role allocation, and activation status.
+        </div>
+        <p class="small-text">
+            When creating a patient account, enter the linked patient ID so the patient only sees their own healthcare data.
+        </p>
+    </div>
+</div>
+
+<div class="card">
+    <h3 class="section-title">Manage Existing Users</h3>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Linked Patient ID</th>
+            <th>Active</th>
+            <th>Action</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ user.linked_patient_id }}</td>
+            <td>{{ user.active }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('admin.toggle_user', user_id=user.id) }}" class="inline-form">
+                    <button type="submit" class="btn-small">Toggle Active</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}

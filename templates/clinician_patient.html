@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Patient Record</h1>
+
+<p><strong>Patient ID:</strong> {{ record.patient_id }}</p>
+
+<form method="POST" action="{{ url_for('clinician.update_patient', patient_id=record.patient_id) }}">
+    <label>Full Name</label>
+    <input type="text" name="full_name" value="{{ record.full_name }}" required>
+
+    <label>Age</label>
+    <input type="text" name="age" value="{{ record.age }}" required>
+
+    <label>Blood Pressure</label>
+    <input type="text" name="blood_pressure" value="{{ record.blood_pressure }}" required>
+
+    <label>Cholesterol</label>
+    <input type="text" name="cholesterol" value="{{ record.cholesterol }}" required>
+
+    <label>Resting ECG</label>
+    <input type="text" name="resting_ecg" value="{{ record.resting_ecg }}" required>
+
+    <label>Medical History</label>
+    <textarea name="medical_history" required>{{ record.medical_history }}</textarea>
+
+    <button type="submit">Update Patient Details</button>
+</form>
+
+<form method="POST" action="{{ url_for('clinician.add_note', patient_id=record.patient_id) }}">
+    <label>Date</label>
+    <input type="text" name="date" placeholder="YYYY-MM-DD" required>
+
+    <label>Note</label>
+    <textarea name="note" required></textarea>
+
+    <button type="submit">Add Note</button>
+</form>
+
+<form method="POST" action="{{ url_for('clinician.add_new_prescription', patient_id=record.patient_id) }}">
+    <label>Date</label>
+    <input type="text" name="date" placeholder="YYYY-MM-DD" required>
+
+    <label>Drug</label>
+    <input type="text" name="drug" required>
+
+    <label>Dosage</label>
+    <input type="text" name="dosage" required>
+
+    <button type="submit">Add Prescription</button>
+</form>
+
+<form method="POST" action="{{ url_for('clinician.add_new_appointment', patient_id=record.patient_id) }}">
+    <label>Date</label>
+    <input type="text" name="date" placeholder="YYYY-MM-DD" required>
+
+    <label>Details</label>
+    <input type="text" name="details" required>
+
+    <button type="submit">Add Appointment</button>
+</form>
+{% endblock %}

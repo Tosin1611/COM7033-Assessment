@@ -7,3 +7,25 @@
 2026-03-25 21:22:03,489 INFO 127.0.0.1 - - [25/Mar/2026 21:22:03] "[32mGET / HTTP/1.1[0m" 302 -
 2026-03-25 21:22:03,535 INFO 127.0.0.1 - - [25/Mar/2026 21:22:03] "GET /login HTTP/1.1" 200 -
 2026-03-25 21:22:04,754 INFO 127.0.0.1 - - [25/Mar/2026 21:22:04] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-25 21:23:04,344 INFO  * Detected change in 'c:\\Users\\tosin\\Documents\\Secure Healthcare App\\validators.py', reloading
+2026-03-25 21:23:04,861 INFO  * Restarting with stat
+2026-03-25 21:23:05,173 WARNING  * Debugger is active!
+2026-03-25 21:23:05,175 INFO  * Debugger PIN: 101-991-064
+2026-03-25 21:23:18,217 INFO  * Detected change in 'c:\\Users\\tosin\\Documents\\Secure Healthcare App\\db\\mongo_records.py', reloading
+2026-03-25 21:23:18,730 INFO  * Restarting with stat
+2026-03-25 21:23:19,032 WARNING  * Debugger is active!
+2026-03-25 21:23:19,034 INFO  * Debugger PIN: 101-991-064
+2026-03-25 21:23:43,103 INFO  * Detected change in 'c:\\Users\\tosin\\Documents\\Secure Healthcare App\\routes\\clinician_routes.py', reloading
+2026-03-25 21:23:43,606 INFO  * Restarting with stat
+2026-03-25 21:23:43,946 WARNING  * Debugger is active!
+2026-03-25 21:23:43,948 INFO  * Debugger PIN: 101-991-064
+2026-03-25 21:25:16,422 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-25 21:25:16,422 INFO [33mPress CTRL+C to quit[0m
+2026-03-25 21:25:16,423 INFO  * Restarting with stat
+2026-03-25 21:25:16,717 WARNING  * Debugger is active!
+2026-03-25 21:25:16,718 INFO  * Debugger PIN: 101-991-064
+2026-03-25 21:25:24,496 INFO 127.0.0.1 - - [25/Mar/2026 21:25:24] "[32mGET / HTTP/1.1[0m" 302 -
+2026-03-25 21:25:24,545 INFO 127.0.0.1 - - [25/Mar/2026 21:25:24] "GET /login HTTP/1.1" 200 -
+2026-03-25 21:25:25,664 INFO 127.0.0.1 - - [25/Mar/2026 21:25:25] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-25 21:25:46,622 INFO 127.0.0.1 - - [25/Mar/2026 21:25:46] "POST /login HTTP/1.1" 200 -

@@ -41,3 +41,58 @@ def seed_default_patient_records():
 
 def get_patient_record(patient_id):
     return records_collection.find_one({"patient_id": patient_id}, {"_id": 0})
+
+
+def search_patient_records(patient_id=None, full_name=None):
+    query = {}
+    if patient_id:
+        query["patient_id"] = patient_id
+    if full_name:
+        query["full_name"] = {"$regex": full_name, "$options": "i"}
+
+    return list(records_collection.find(query, {"_id": 0}))
+
+
+def update_patient_basic_details(patient_id, updates):
+    return records_collection.update_one(
+        {"patient_id": patient_id},
+        {"$set": updates}
+    )
+
+
+def add_consultation_note(patient_id, clinician, note, date):
+    return records_collection.update_one(
+        {"patient_id": patient_id},
+        {"$push": {
+            "consultation_notes": {
+                "date": date,
+                "clinician": clinician,
+                "note": note
+            }
+        }}
+    )
+
+
+def add_prescription(patient_id, drug, dosage, date):
+    return records_collection.update_one(
+        {"patient_id": patient_id},
+        {"$push": {
+            "prescriptions": {
+                "date": date,
+                "drug": drug,
+                "dosage": dosage
+            }
+        }}
+    )
+
+
+def add_appointment(patient_id, date, details):
+    return records_collection.update_one(
+        {"patient_id": patient_id},
+        {"$push": {
+            "appointments": {
+                "date": date,
+                "details": details
+            }
+        }}
+    )

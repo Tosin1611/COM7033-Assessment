@@ -1,4 +1,34 @@
 {% extends "base.html" %}
+
 {% block content %}
 <h1>Clinician Dashboard</h1>
+
+<form method="POST">
+    <label>Patient ID</label>
+    <input type="text" name="patient_id">
+
+    <label>Full Name</label>
+    <input type="text" name="full_name">
+
+    <button type="submit">Search</button>
+</form>
+
+{% if results %}
+    <table>
+        <tr>
+            <th>Patient ID</th>
+            <th>Full Name</th>
+            <th>Age</th>
+            <th>Action</th>
+        </tr>
+        {% for record in results %}
+        <tr>
+            <td>{{ record.patient_id }}</td>
+            <td>{{ record.full_name }}</td>
+            <td>{{ record.age }}</td>
+            <td><a href="{{ url_for('clinician.view_patient', patient_id=record.patient_id) }}">View</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
 {% endblock %}

@@ -34,11 +34,19 @@ def dashboard():
             valid_patient_id, message = validate_patient_id(patient_id)
             if not valid_patient_id:
                 flash(message)
+                logging.warning("Invalid patient search by clinician %s", session.get("username"))
                 return render_template("clinician_dashboard.html", results=[])
 
         results = search_patient_records(
             patient_id=patient_id if patient_id else None,
             full_name=full_name if full_name else None
+        )
+
+        logging.info(
+            "Clinician %s searched records with patient_id=%s full_name=%s",
+            session.get("username"),
+            patient_id,
+            full_name
         )
 
     return render_template("clinician_dashboard.html", results=results)
@@ -51,8 +59,10 @@ def view_patient(patient_id):
     record = get_patient_record(patient_id)
     if not record:
         flash("Patient record not found.")
+        logging.warning("Clinician %s attempted to view missing patient %s", session.get("username"), patient_id)
         return redirect(url_for("clinician.dashboard"))
 
+    logging.info("Clinician %s viewed patient record %s", session.get("username"), patient_id)
     return render_template("clinician_patient.html", record=record)
 
 
@@ -121,6 +131,7 @@ def add_note(patient_id):
         return redirect(url_for("clinician.view_patient", patient_id=patient_id))
 
     add_consultation_note(patient_id, session.get("username"), note, date)
+    logging.info("Clinician %s added consultation note to patient %s", session.get("username"), patient_id)
     flash("Consultation note added successfully.")
     return redirect(url_for("clinician.view_patient", patient_id=patient_id))
 
@@ -148,6 +159,7 @@ def add_new_prescription(patient_id):
         return redirect(url_for("clinician.view_patient", patient_id=patient_id))
 
     add_prescription(patient_id, drug, dosage, date)
+    logging.info("Clinician %s added prescription to patient %s", session.get("username"), patient_id)
     flash("Prescription added successfully.")
     return redirect(url_for("clinician.view_patient", patient_id=patient_id))
 
@@ -170,5 +182,6 @@ def add_new_appointment(patient_id):
         return redirect(url_for("clinician.view_patient", patient_id=patient_id))
 
     add_appointment(patient_id, date, details)
+    logging.info("Clinician %s added appointment to patient %s", session.get("username"), patient_id)
     flash("Appointment added successfully.")
     return redirect(url_for("clinician.view_patient", patient_id=patient_id))

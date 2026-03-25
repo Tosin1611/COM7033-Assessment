@@ -1,4 +1,5 @@
-from flask import Blueprint, current_app, render_template, request, flash, redirect, url_for
+import logging
+from flask import Blueprint, current_app, render_template, request, flash, redirect, url_for, session
 from auth_helpers import login_required, role_required
 from db.sqlite_auth import get_all_users, create_user, toggle_user_active, get_user_by_username
 from validators import validate_username, validate_password, validate_role, validate_patient_id
@@ -52,6 +53,12 @@ def dashboard():
             return render_template("admin_dashboard.html", users=users)
 
         create_user(db_path, username, password, role, linked_patient_id)
+        logging.info(
+            "Admin %s created user %s with role %s",
+            session.get("username"),
+            username,
+            role
+        )
         flash("User created successfully.")
         return redirect(url_for("admin.dashboard"))
 
@@ -64,5 +71,6 @@ def dashboard():
 @role_required("admin")
 def toggle_user(user_id):
     toggle_user_active(current_app.config["AUTH_DB_PATH"], user_id)
+    logging.info("Admin %s toggled user active status for user id %s", session.get("username"), user_id)
     flash("User account status updated.")
     return redirect(url_for("admin.dashboard"))

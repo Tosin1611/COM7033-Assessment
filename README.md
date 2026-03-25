@@ -1,5 +1,3 @@
- COM7033-Assessment
- <<<<<<< HEAD
 # Secure Healthcare Management Flask Application
 
 ## Overview
@@ -133,6 +131,3 @@ your_project/
     ├── test_validators.py
     ├── test_auth_routes.py
     └── test_access_control.py
-=======
-# COM7033-Assessment
->>>>>>> 51daa9a351ae4a6b6f04d7c92a84575b0c7237e7

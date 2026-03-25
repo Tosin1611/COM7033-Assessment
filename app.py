@@ -1,5 +1,7 @@
 from flask import Flask
 from config import Config
+from db.sqlite_auth import init_auth_db, seed_default_users
+from db.mongo_records import init_mongo_records
 from routes.auth_routes import auth_bp
 from routes.patient_routes import patient_bp
 from routes.clinician_routes import clinician_bp
@@ -12,6 +14,14 @@ def create_app(test_config=None):
 
     if test_config:
         app.config.update(test_config)
+
+    init_auth_db(app.config["AUTH_DB_PATH"])
+    seed_default_users(app.config["AUTH_DB_PATH"])
+    init_mongo_records(
+        app.config["MONGO_URI"],
+        app.config["MONGO_DB_NAME"],
+        app.config["MONGO_COLLECTION"]
+    )
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(patient_bp)

@@ -1,4 +1,52 @@
 {% extends "base.html" %}
+
 {% block content %}
 <h1>Admin Dashboard</h1>
+
+<h2>Create User</h2>
+<form method="POST">
+    <label>Username</label>
+    <input type="text" name="username" required>
+
+    <label>Password</label>
+    <input type="password" name="password" required>
+
+    <label>Role</label>
+    <select name="role" required>
+        <option value="patient">Patient</option>
+        <option value="clinician">Clinician</option>
+        <option value="admin">Admin</option>
+    </select>
+
+    <label>Linked Patient ID</label>
+    <input type="text" name="linked_patient_id">
+
+    <button type="submit">Create User</button>
+</form>
+
+<h2>Manage Users</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Linked Patient ID</th>
+        <th>Active</th>
+        <th>Action</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.linked_patient_id }}</td>
+        <td>{{ user.active }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('admin.toggle_user', user_id=user.id) }}">
+                <button type="submit">Toggle Active</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}

@@ -46,3 +46,28 @@ def validate_date(date_text):
         return True, ""
     except (ValueError, TypeError):
         return False, "Date must be in YYYY-MM-DD format."
+    
+def validate_username(username):
+    if not username:
+        return False, "Username is required."
+    username = username.strip()
+    if len(username) < 3 or len(username) > 30:
+        return False, "Username must be between 3 and 30 characters."
+    if not re.fullmatch(r"[A-Za-z0-9_]+", username):
+        return False, "Username can contain only letters, numbers and underscores."
+    return True, ""
+
+
+def validate_password(password):
+    if not password:
+        return False, "Password is required."
+    if len(password) < 8:
+        return False, "Password must be at least 8 characters long."
+    return True, ""
+
+
+def validate_role(role):
+    allowed_roles = ["patient", "clinician", "admin"]
+    if role not in allowed_roles:
+        return False, "Invalid role."
+    return True, ""

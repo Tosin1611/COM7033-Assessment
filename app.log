@@ -38,3 +38,35 @@
 2026-03-25 22:11:12,946 INFO 127.0.0.1 - - [25/Mar/2026 22:11:12] "[32mGET / HTTP/1.1[0m" 302 -
 2026-03-25 22:11:12,980 INFO 127.0.0.1 - - [25/Mar/2026 22:11:12] "GET /login HTTP/1.1" 200 -
 2026-03-25 22:11:14,157 INFO 127.0.0.1 - - [25/Mar/2026 22:11:14] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-25 22:17:37,509 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-25 22:17:37,509 INFO [33mPress CTRL+C to quit[0m
+2026-03-25 22:17:37,510 INFO  * Restarting with stat
+2026-03-25 22:17:37,801 WARNING  * Debugger is active!
+2026-03-25 22:17:37,803 INFO  * Debugger PIN: 101-991-064
+2026-03-25 22:17:46,913 INFO 127.0.0.1 - - [25/Mar/2026 22:17:46] "[32mGET / HTTP/1.1[0m" 302 -
+2026-03-25 22:17:46,949 INFO 127.0.0.1 - - [25/Mar/2026 22:17:46] "GET /login HTTP/1.1" 200 -
+2026-03-25 22:17:48,032 INFO 127.0.0.1 - - [25/Mar/2026 22:17:48] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-25 22:17:59,032 WARNING Failed login attempt for username: patient1
+2026-03-25 22:17:59,033 INFO 127.0.0.1 - - [25/Mar/2026 22:17:59] "POST /login HTTP/1.1" 200 -
+2026-03-25 22:18:13,452 INFO Successful login for username: patient1 with role: patient
+2026-03-25 22:18:13,456 INFO 127.0.0.1 - - [25/Mar/2026 22:18:13] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-03-25 22:18:13,479 INFO 127.0.0.1 - - [25/Mar/2026 22:18:13] "GET /patient/dashboard HTTP/1.1" 200 -
+2026-03-25 22:18:24,257 INFO User logged out: patient1
+2026-03-25 22:18:24,258 INFO 127.0.0.1 - - [25/Mar/2026 22:18:24] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-25 22:18:24,266 INFO 127.0.0.1 - - [25/Mar/2026 22:18:24] "GET /login HTTP/1.1" 200 -
+2026-03-25 22:18:36,477 INFO Successful login for username: clinician1 with role: clinician
+2026-03-25 22:18:36,478 INFO 127.0.0.1 - - [25/Mar/2026 22:18:36] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-03-25 22:18:36,489 INFO 127.0.0.1 - - [25/Mar/2026 22:18:36] "GET /clinician/dashboard HTTP/1.1" 200 -
+2026-03-25 22:18:42,693 INFO User logged out: clinician1
+2026-03-25 22:18:42,693 INFO 127.0.0.1 - - [25/Mar/2026 22:18:42] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-03-25 22:18:42,703 INFO 127.0.0.1 - - [25/Mar/2026 22:18:42] "GET /login HTTP/1.1" 200 -
+2026-03-25 22:18:55,357 INFO Successful login for username: admin1 with role: admin
+2026-03-25 22:18:55,358 INFO 127.0.0.1 - - [25/Mar/2026 22:18:55] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-03-25 22:18:55,368 INFO 127.0.0.1 - - [25/Mar/2026 22:18:55] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-03-25 22:19:04,436 INFO Admin admin1 toggled user active status for user id 1
+2026-03-25 22:19:04,437 INFO 127.0.0.1 - - [25/Mar/2026 22:19:04] "[32mPOST /admin/toggle_user/1 HTTP/1.1[0m" 302 -
+2026-03-25 22:19:04,445 INFO 127.0.0.1 - - [25/Mar/2026 22:19:04] "GET /admin/dashboard HTTP/1.1" 200 -
+2026-03-25 22:19:07,862 INFO Admin admin1 toggled user active status for user id 1
+2026-03-25 22:19:07,863 INFO 127.0.0.1 - - [25/Mar/2026 22:19:07] "[32mPOST /admin/toggle_user/1 HTTP/1.1[0m" 302 -
+2026-03-25 22:19:07,871 INFO 127.0.0.1 - - [25/Mar/2026 22:19:07] "GET /admin/dashboard HTTP/1.1" 200 -
